@@ -1,3 +1,4 @@
+import RequireAuth from '@/pages/auth/signin/components/require_auth';
 import NotFound from '@/pages/not-found';
 import { Suspense, lazy } from 'react';
 import { Navigate, Outlet, useRoutes } from 'react-router-dom';
@@ -14,18 +15,18 @@ const PayHistoryPage = lazy(() => import('@/pages/pay_history'));
 const VehiclePage = lazy(() => import('@/pages/vehicle'));
 const ParkingOptionPage = lazy(() => import('@/pages/parking'));
 
-// ----------------------------------------------------------------------
-
 export default function AppRouter() {
   const dashboardRoutes = [
     {
       path: '/',
       element: (
-        <DashboardLayout>
-          <Suspense>
-            <Outlet />
-          </Suspense>
-        </DashboardLayout>
+        <RequireAuth>
+          <DashboardLayout>
+            <Suspense>
+              <Outlet />
+            </Suspense>
+          </DashboardLayout>
+        </RequireAuth>
       ),
       children: [
         {

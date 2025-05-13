@@ -24,12 +24,21 @@ export default function UsersTable({ users, onDelete }: Props) {
           <TableHeader>
             <TableRow className="text-xs uppercase tracking-wider text-muted-foreground">
               <TableHead className="w-32">Username</TableHead>
-              <TableHead className="w-40">First name</TableHead>
-              <TableHead className="w-56">Created at</TableHead>
-              <TableHead className="w-56">Updated at</TableHead>
+              <TableHead className="w-40">First&nbsp;name</TableHead>
+              <TableHead className="w-48">Website&nbsp;login</TableHead>
+              <TableHead className="w-48">Website&nbsp;password</TableHead>
+              <TableHead className="w-40 text-center">
+                Paid&nbsp;→&nbsp;Complete
+              </TableHead>
+              <TableHead className="w-40 text-center">
+                Reissue&nbsp;after&nbsp;completion
+              </TableHead>
+              <TableHead className="w-48">Created&nbsp;at</TableHead>
+              <TableHead className="w-48">Updated&nbsp;at</TableHead>
               <TableHead className="w-12 text-right" />
             </TableRow>
           </TableHeader>
+
           <TableBody>
             {users.map((u) => (
               <UserRow key={u.id} user={u} onDelete={onDelete} />

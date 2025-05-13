@@ -44,7 +44,6 @@ export default function UserActions({ userId, onDeleted }: Props) {
 
   return (
     <>
-      {/* ---------- DROPDOWN ---------- */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="h-8 w-8 p-0">
@@ -65,7 +64,6 @@ export default function UserActions({ userId, onDeleted }: Props) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* ---------- ALERT DIALOG (отдельно) ---------- */}
       <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>

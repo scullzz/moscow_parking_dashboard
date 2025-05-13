@@ -8,46 +8,34 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useRouter } from '@/routes/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { useAuth } from './auth_context';
 
 const formSchema = z.object({
   email: z.string(),
   password: z.string()
 });
-
-type UserFormValue = z.infer<typeof formSchema>;
+type LoginFormValues = z.infer<typeof formSchema>;
 
 export default function UserAuthForm() {
-  const router = useRouter();
-  const [loading] = useState(false);
-  const form = useForm<UserFormValue>({
+  const { login } = useAuth();
+  const [loading, setLoading] = useState(false);
+
+  const form = useForm<LoginFormValues>({
     resolver: zodResolver(formSchema)
   });
 
-  const onSubmit = async (data: UserFormValue) => {
+  const onSubmit = async (data: LoginFormValues) => {
     try {
-      const response = await fetch(
-        'https://api.projectdevdnkchain.ru/test-admin-auth',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            auth: data.password,
-            login: data.email
-          }
-        }
-      );
-      if (response.status === 200) {
-        router.push('/users');
-      } else {
-        alert('Invalid email or password');
-      }
+      setLoading(true);
+      await login(data.email, data.password);
     } catch (err) {
-      console.log(err);
+      alert((err as Error).message);
+    } finally {
+      setLoading(false);
     }
   };
 

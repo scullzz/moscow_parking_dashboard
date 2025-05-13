@@ -2,6 +2,10 @@ export interface User {
   id: number;
   username: string;
   first_name: string;
+  website_login: string;
+  website_password: string;
+  complete_after_payment: boolean;
+  reissue_after_completion: boolean;
   create_dttm: string;
   update_dttm: string;
 }
